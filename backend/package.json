@@ -1,0 +1,17 @@
+{
+  "name": "careerlens-backend",
+  "version": "1.0.0",
+  "description": "CareerLens Backend API — Career Recommendation Service",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node tests.js && node e2eTests.js",
+    "test:unit": "node tests.js",
+    "test:e2e": "node e2eTests.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.0"
+  }
+}
