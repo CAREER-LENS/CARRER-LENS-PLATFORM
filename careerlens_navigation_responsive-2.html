@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerLens | Navigation & Responsive Design</title>
+  <style>
+    :root {
+      --cream: #f7f2e9;
+      --beige: #e8dcc8;
+      --ink: #2f302b;
+      --muted: #72746d;
+      --accent: #9a7955;
+      --white: #ffffff;
+      --line: #e9e3d9;
+      --shadow: 0 12px 35px rgba(55, 44, 30, .08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 92%); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-wrap {
+      min-height: 74px; display: flex; align-items: center;
+      justify-content: space-between; gap: 20px;
+    }
+    .brand { font-size: 1.45rem; font-weight: 800; }
+    .brand span, h1 span { color: var(--accent); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a { font-size: .94rem; color: #55564f; font-weight: 600; }
+    nav a:hover, nav a.active { color: var(--accent); }
+    .menu-btn {
+      display: none; border: 1px solid var(--line); background: white;
+      border-radius: 10px; padding: 8px 12px; font-size: 1.2rem; cursor: pointer;
+    }
+    .hero { padding: 78px 0 64px; }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.15fr .85fr;
+      gap: 45px; align-items: center;
+    }
+    .eyebrow {
+      display: inline-block; padding: 7px 13px; border-radius: 30px;
+      background: #eee4d5; color: #775b3e; font-size: .82rem;
+      font-weight: 700; margin-bottom: 18px;
+    }
+    h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.1; margin-bottom: 20px; }
+    .hero p { max-width: 540px; color: var(--muted); font-size: 1.08rem; margin-bottom: 28px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 12px 19px; border-radius: 10px; border: 1px solid var(--accent);
+      font-weight: 700; cursor: pointer; transition: .2s;
+    }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: #806344; transform: translateY(-1px); }
+    .btn-secondary { background: white; color: var(--ink); border-color: var(--line); }
+    .hero-card, .stat, .feature, .result-card {
+      background: white; border: 1px solid var(--line); box-shadow: var(--shadow);
+    }
+    .hero-card { border-radius: 24px; padding: 28px; }
+    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+    .tag { background: #f0e7da; color: #775b3e; padding: 5px 10px; border-radius: 20px; font-size: .78rem; font-weight: 700; }
+    .career-row { display: flex; align-items: center; gap: 13px; padding: 14px 0; border-top: 1px solid var(--line); }
+    .career-icon { width: 44px; height: 44px; display: grid; place-items: center; background: var(--cream); border-radius: 13px; font-size: 1.3rem; }
+    .career-info { flex: 1; }
+    .career-info strong { display: block; }
+    .career-info small { color: var(--muted); }
+    .match { color: #6c805c; font-size: .85rem; font-weight: 800; }
+    section.content-section { padding: 58px 0; }
+    .section-heading { text-align: center; margin-bottom: 30px; }
+    .section-heading h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 8px; }
+    .section-heading p, .feature p, .result-card p { color: var(--muted); }
+    .stats, .feature-grid, .results-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .stats { margin-top: 24px; }
+    .stat, .feature, .result-card { border-radius: 18px; padding: 23px; }
+    .stat strong { display: block; font-size: 1.8rem; color: var(--accent); }
+    .stat span { color: var(--muted); font-size: .92rem; }
+    .feature .symbol, .result-card .symbol { font-size: 1.7rem; margin-bottom: 10px; }
+    .feature h3, .result-card h3 { margin-bottom: 7px; }
+    .feature p, .result-card p { font-size: .94rem; }
+    .skills-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px; }
+    .skill { background: white; border: 1px solid var(--line); padding: 9px 14px; border-radius: 30px; font-size: .9rem; }
+    .alt { background: #f0e8dc; }
+    .result-card { transition: transform .2s, box-shadow .2s; }
+    .result-card:hover { transform: translateY(-4px); }
+    .result-card .btn { margin-top: 15px; padding: 9px 13px; font-size: .9rem; }
+    .notice { display: none; margin-top: 18px; background: #f0e8dc; border-radius: 12px; padding: 13px 16px; color: #5e4a34; }
+    .notice.show { display: block; }
+    footer { background: white; border-top: 1px solid var(--line); padding: 25px 0; color: var(--muted); font-size: .9rem; }
+    .footer-row { display: flex; justify-content: space-between; gap: 15px; flex-wrap: wrap; }
+    @media (max-width: 760px) {
+      .nav-wrap { min-height: 68px; }
+      .menu-btn { display: block; }
+      nav {
+        display: none; position: absolute; top: 68px; left: 0; right: 0;
+        background: white; padding: 18px 4% 22px; border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: stretch; gap: 0;
+      }
+      nav.open { display: flex; }
+      nav a { padding: 11px 0; border-bottom: 1px solid #f3eee7; }
+      nav a:last-child { border-bottom: 0; }
+      .hero { padding: 48px 0; }
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .stats, .feature-grid, .results-grid { grid-template-columns: 1fr; }
+      section.content-section { padding: 44px 0; }
+    }
+    @media (min-width: 761px) and (max-width: 980px) {
+      nav { gap: 13px; }
+      nav a { font-size: .88rem; }
+      .hero-grid { gap: 25px; }
+      .feature-grid, .results-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav-wrap">
+      <a class="brand" href="#home" aria-label="CareerLens home">Career<span>Lens</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation menu" aria-expanded="false">☰</button>
+      <nav id="mainNav" aria-label="Main navigation">
+        <a href="#home" class="active">Home</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#skills">Skills</a>
+        <a href="#careers">Careers</a>
+        <a href="#results">Results</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">YOUR FUTURE, IN FOCUS</span>
+          <h1>Discover a career that <span>fits you.</span></h1>
+          <p>Explore your strengths, build useful skills, and find career paths that match your interests with CareerLens.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#dashboard">Explore Dashboard ↗</a>
+            <a class="btn btn-secondary" href="#careers">Explore Careers</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Example career recommendations">
+          <div class="card-top"><h3>Career matches</h3><span class="tag">Sample</span></div>
+          <div class="career-row"><div class="career-icon">💻</div><div class="career-info"><strong>Web Developer</strong><small>Build websites and apps</small></div><span class="match">92%</span></div>
+          <div class="career-row"><div class="career-icon">📊</div><div class="career-info"><strong>Data Analyst</strong><small>Find insights in data</small></div><span class="match">86%</span></div>
+          <div class="career-row"><div class="career-icon">🎨</div><div class="career-info"><strong>UI/UX Designer</strong><small>Create helpful experiences</small></div><span class="match">81%</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="dashboard">
+      <div class="container">
+        <div class="section-heading"><h2>Your Dashboard</h2><p>A simple starting point for your career journey.</p></div>
+        <div class="stats">
+          <div class="stat"><strong>03</strong><span>Career paths to explore</span></div>
+          <div class="stat"><strong>06</strong><span>Skills to start building</span></div>
+          <div class="stat"><strong>01</strong><span>Goal: take your next step</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section alt" id="skills">
+      <div class="container">
+        <div class="section-heading"><h2>Build Your Skills</h2><p>Start with the basics and improve one step at a time.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><div class="symbol">🧠</div><h3>Problem Solving</h3><p>Practice breaking a big problem into smaller steps.</p></article>
+          <article class="feature"><div class="symbol">💬</div><h3>Communication</h3><p>Share your ideas clearly and work well with others.</p></article>
+          <article class="feature"><div class="symbol">⌨️</div><h3>Technical Skills</h3><p>Learn tools and technology used in your chosen field.</p></article>
+        </div>
+        <div class="skills-list">
+          <span class="skill">HTML &amp; CSS</span><span class="skill">JavaScript</span><span class="skill">Teamwork</span><span class="skill">Critical Thinking</span><span class="skill">Time Management</span><span class="skill">Presentation</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="careers">
+      <div class="container">
+        <div class="section-heading"><h2>Explore Careers</h2><p>Learn about different paths and what they involve.</p></div>
+        <div class="feature-grid">
+          <article class="feature"><div class="symbol">💻</div><h3>Web Developer</h3><p>Creates and maintains websites using coding and design skills.</p></article>
+          <article class="feature"><div class="symbol">📈</div><h3>Data Analyst</h3><p>Organizes data and helps people make informed decisions.</p></article>
+          <article class="feature"><div class="symbol">🎨</div><h3>UI/UX Designer</h3><p>Designs digital products that are clear and easy to use.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section alt" id="results">
+      <div class="container">
+        <div class="section-heading"><h2>Your Results</h2><p>These are example recommendations. Your real results depend on your interests and skills.</p></div>
+        <div class="results-grid">
+          <article class="result-card"><div class="symbol">💻</div><h3>Web Developer</h3><p>Suggested next step: create a small personal webpage.</p><button class="btn btn-secondary detail-btn" data-career="Web Developer">View next step</button></article>
+          <article class="result-card"><div class="symbol">📊</div><h3>Data Analyst</h3><p>Suggested next step: practice with a simple spreadsheet.</p><button class="btn btn-secondary detail-btn" data-career="Data Analyst">View next step</button></article>
+          <article class="result-card"><div class="symbol">🎨</div><h3>UI/UX Designer</h3><p>Suggested next step: sketch an app screen on paper.</p><button class="btn btn-secondary detail-btn" data-career="UI/UX Designer">View next step</button></article>
+        </div>
+        <div class="notice" id="notice" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row"><span><strong>CareerLens</strong> — See your possibilities.</span><span>Student project · Navigation &amp; Responsive Design</span></div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = mainNav.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '✕' : '☰';
+    });
+
+    document.querySelectorAll('#mainNav a').forEach(link => {
+      link.addEventListener('click', () => {
+        mainNav.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.textContent = '☰';
+        document.querySelectorAll('#mainNav a').forEach(item => item.classList.remove('active'));
+        link.classList.add('active');
+      });
+    });
+
+    const nextSteps = {
+      'Web Developer': 'Start with HTML, then add CSS to style a one-page website.',
+      'Data Analyst': 'Try organizing sample data in a spreadsheet and make a simple chart.',
+      'UI/UX Designer': 'Sketch a home screen and ask a friend to try your design.'
+    };
+    const notice = document.getElementById('notice');
+    document.querySelectorAll('.detail-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const career = button.dataset.career;
+        notice.textContent = career + ': ' + nextSteps[career];
+        notice.classList.add('show');
+      });
+    });
+  </script>
+</body>
+</html>
