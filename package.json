@@ -1,0 +1,17 @@
+{
+  "name": "careerlens-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CareerLens Task 2 backend API",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "test": "node backend/tests.js"
+  },
+  "engines": { "node": ">=22.5.0" },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
